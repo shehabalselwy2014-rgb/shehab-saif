@@ -42,21 +42,66 @@ function switchLanguage() {
   initCharts();
 }
 
+// Fetches a JSON file with a timeout and a few retries, so that a slow or
+// momentarily dropped mobile connection doesn't permanently leave a section
+// empty. Throws only after every attempt is exhausted.
+async function fetchJsonResilient(url, { retries = 2, timeout = 8000 } = {}) {
+  let lastErr;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+    try {
+      const res = await fetch(url, { signal: controller.signal, cache: 'force-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    } catch (err) {
+      lastErr = err;
+      // Small backoff before retrying, growing with each attempt.
+      if (attempt < retries) await new Promise(r => setTimeout(r, 600 * (attempt + 1)));
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  throw lastErr;
+}
+
 // Loads the data-driven sections from JSON and renders them. Resolved
 // relative to this module so it works regardless of where the page is served.
+// Each section loads and renders independently: if one request fails on a
+// flaky connection, the others still appear instead of the whole page breaking.
 async function loadDynamicSections() {
   const url = (name) => new URL(`../data/${name}.json`, import.meta.url);
-  const [achievements, experience, roles, articles] = await Promise.all([
-    fetch(url('achievements')).then(r => r.json()),
-    fetch(url('experience')).then(r => r.json()),
-    fetch(url('roles')).then(r => r.json()),
-    fetch(url('articles')).then(r => r.json()),
-  ]);
+  const sections = [
+    { name: 'achievements', target: 'impact-grid', render: renderAchievements },
+    { name: 'experience', target: 'experience-timeline', render: renderExperience },
+    { name: 'roles', target: 'expertise-grid', render: renderRoles },
+    { name: 'articles', target: 'insights-grid', render: renderArticles },
+  ];
 
-  renderAchievements(achievements, document.getElementById('impact-grid'));
-  renderExperience(experience, document.getElementById('experience-timeline'));
-  renderRoles(roles, document.getElementById('expertise-grid'));
-  renderArticles(articles, document.getElementById('insights-grid'));
+  await Promise.all(sections.map(async ({ name, target, render }) => {
+    const el = document.getElementById(target);
+    if (!el) return;
+    try {
+      const data = await fetchJsonResilient(url(name));
+      render(data, el);
+    } catch (err) {
+      console.error(`Failed to load section "${name}"`, err);
+      renderSectionFallback(el);
+    }
+  }));
+}
+
+// Shown in place of a section whose data could not be loaded, with a button
+// to retry without reloading the whole page.
+function renderSectionFallback(el) {
+  const msg = currentLang === 'ar'
+    ? 'تعذّر تحميل هذا القسم. تحقق من اتصالك وحاول مرة أخرى.'
+    : 'This section could not be loaded. Check your connection and try again.';
+  const retry = currentLang === 'ar' ? 'إعادة المحاولة' : 'Retry';
+  el.innerHTML = `<div class="section-fallback"><p>${msg}</p><button type="button" class="btn btn-outline" data-retry>${retry}</button></div>`;
+  el.querySelector('[data-retry]').addEventListener('click', () => {
+    loadDynamicSections().then(initObservers);
+  });
 }
 
 function animateCounter(el, target) {
@@ -96,6 +141,10 @@ function initObservers() {
 
 let charts = {};
 function initCharts() {
+  // Chart.js is loaded as an optional, deferred script. If it failed to load
+  // (e.g. a flaky mobile connection) the rest of the page still works.
+  if (typeof Chart === 'undefined') return;
+
   const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
   const textColor = isDarkMode ? '#F1F5F9' : '#0F172A';
   const gridColor = isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(11,31,58,0.05)';
