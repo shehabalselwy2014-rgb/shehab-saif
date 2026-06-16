@@ -1,0 +1,44 @@
+[
+  {
+    "icon": "fas fa-bullhorn",
+    "tag": { "ar": "التسويق", "en": "Marketing" },
+    "title": { "ar": "مستقبل التسويق الرقمي في الأسواق الناشئة", "en": "The Future of Digital Marketing in Emerging Markets" },
+    "year": "2024",
+    "readTime": "5 min"
+  },
+  {
+    "icon": "fas fa-chart-line",
+    "tag": { "ar": "نمو الأعمال", "en": "Business Growth" },
+    "title": { "ar": "استراتيجيات التوسع السوقي في بيئات عالية المخاطر", "en": "Market Expansion Strategies in High-Risk Environments" },
+    "year": "2024",
+    "readTime": "7 min"
+  },
+  {
+    "icon": "fas fa-mosque",
+    "tag": { "ar": "التمويل الإسلامي", "en": "Islamic Finance" },
+    "title": { "ar": "التقنية المالية الإسلامية: الفرص والتحديات", "en": "Islamic Fintech: Opportunities & Challenges" },
+    "year": "2024",
+    "readTime": "6 min"
+  },
+  {
+    "icon": "fas fa-microchip",
+    "tag": { "ar": "التحول الرقمي", "en": "Digital Transformation" },
+    "title": { "ar": "كيف تقود التحول الرقمي دون مقاومة تنظيمية", "en": "Leading Digital Transformation Without Organizational Resistance" },
+    "year": "2024",
+    "readTime": "8 min"
+  },
+  {
+    "icon": "fas fa-hand-holding-usd",
+    "tag": { "ar": "الشمول المالي", "en": "Financial Inclusion" },
+    "title": { "ar": "الشمول المالي كمحرك للنمو الاقتصادي المستدام", "en": "Financial Inclusion as a Driver of Sustainable Economic Growth" },
+    "year": "2024",
+    "readTime": "5 min"
+  },
+  {
+    "icon": "fas fa-wallet",
+    "tag": { "ar": "التقنية المالية", "en": "Fintech" },
+    "title": { "ar": "بناء أنظمة بيئية للدفع الرقمي في الأسواق غير الرسمية", "en": "Building Digital Payment Ecosystems in Informal Markets" },
+    "year": "2024",
+    "readTime": "6 min"
+  }
+]

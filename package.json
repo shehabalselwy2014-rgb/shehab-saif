@@ -1,0 +1,11 @@
+{
+  "name": "shehab-saif",
+  "version": "1.0.0",
+  "description": "Executive portfolio for Shehab Abdulraheem Othman Saif — a bilingual (Arabic/English) single-page site driven by JSON content.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev --port 8889"
+  },
+  "license": "UNLICENSED"
+}
