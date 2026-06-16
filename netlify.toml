@@ -1,0 +1,9 @@
+# Netlify configuration for the Shehab Saif portfolio.
+# The site is fully static: index.html at the repo root references assets
+# under /src and /public, so the publish directory is the root itself.
+
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"

@@ -1,0 +1,9 @@
+[
+  { "icon": "fas fa-handshake", "target": 15, "ar": "شراكة استراتيجية", "en": "Strategic Partnerships Secured" },
+  { "icon": "fas fa-users", "target": 5000, "ar": "مستخدم رقمي", "en": "Digital Service Users Acquired" },
+  { "icon": "fas fa-exchange-alt", "target": 20000, "ar": "معاملة شهرية", "en": "Monthly Transactions Generated" },
+  { "icon": "fas fa-chart-line", "target": 110, "ar": "% تحقيق المستهدف", "en": "% Sales Target Achievement" },
+  { "icon": "fas fa-mobile-alt", "target": 35, "ar": "% نمو التبني الرقمي", "en": "% Digital Adoption Growth" },
+  { "icon": "fas fa-trophy", "target": 115, "ar": "% إنجاز المبيعات السنوي", "en": "% Annual Sales Achievement" },
+  { "icon": "fas fa-heart", "target": 8000, "ar": "مستفيد تم خدمته", "en": "Beneficiaries Served" }
+]

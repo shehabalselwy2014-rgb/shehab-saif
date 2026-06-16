@@ -1,0 +1,61 @@
+[
+  {
+    "date": "2023 – الحاضر",
+    "title": { "ar": "مدير التسويق والمبيعات", "en": "Marketing & Sales Director" },
+    "company": "Bank Al Salam Capital — صنعاء، اليمن",
+    "points": [
+      { "ar": "إطلاق منصة دفع رقمية للنقل، جذب 5000+ مستخدم", "en": "Launched digital transportation payment platform, acquiring 5,000+ users" },
+      { "ar": "إبرام 15+ شراكة استراتيجية مع مشغلي النقل وبوابات الدفع", "en": "Secured 15+ strategic partnerships with transport operators and payment gateways" },
+      { "ar": "تحقيق 110% من الأهداف الربع سنوية باستمرار", "en": "Delivered 110% of quarterly sales targets consistently" },
+      { "ar": "قيادة فريق تجاري من 8 أعضاء مع تحسين الإنتاجية 25%", "en": "Led 8-member commercial team, improving output by 25%" }
+    ]
+  },
+  {
+    "date": "2021 – 2023",
+    "title": { "ar": "مدير قاعة المصرفية", "en": "Banking Hall Manager" },
+    "company": "Al Kuraimi Bank for Microfinance — صنعاء",
+    "points": [
+      { "ar": "زيادة التبني الرقمي 28% عبر برامج التوعية والتدريب", "en": "Increased digital banking adoption by 28% through education and training" },
+      { "ar": "تحسين رضا العملاء 20% وتقليل الشكاوى 25%", "en": "Improved customer satisfaction by 20% and reduced complaints by 25%" },
+      { "ar": "إدارة عمليات يومية لـ 500+ عميل يوميًا", "en": "Managed daily operations for 500+ daily customers" }
+    ]
+  },
+  {
+    "date": "2020",
+    "title": { "ar": "ضابط خدمات الأفراد – إقليمي", "en": "Regional Individual Services Officer" },
+    "company": "Al Kuraimi Bank for Microfinance — صنعاء",
+    "points": [
+      { "ar": "تنسيق العمليات الإقليمية وضمان جودة الخدمة", "en": "Coordinated regional operations and ensured service quality" },
+      { "ar": "متابعة تنفيذ المبادرات وتقارير الأداء", "en": "Followed up on initiative execution and performance reporting" }
+    ]
+  },
+  {
+    "date": "2019",
+    "title": { "ar": "مشرف مشروع التحويلات النقدية – UNICEF", "en": "Cash Transfers Project Supervisor – UNICEF" },
+    "company": "Al Kuraimi Bank for Microfinance — صنعاء",
+    "points": [
+      { "ar": "إدارة عمليات تحويل نقدي لـ 8000+ مستفيد بامتثال 98%", "en": "Directed cash-transfer operations for 8,000+ beneficiaries with 98% compliance" },
+      { "ar": "تقليل الأخطاء التشغيلية 15% عبر ضوابط العمليات", "en": "Reduced operational errors by 15% through process controls" },
+      { "ar": "تسليم جميع مراحل المشروع في الموعد المحدد", "en": "Delivered all project milestones on schedule" }
+    ]
+  },
+  {
+    "date": "2017 – 2018",
+    "title": { "ar": "مدير فرع", "en": "Branch Manager" },
+    "company": "Al Kuraimi Bank for Microfinance — صنعاء",
+    "points": [
+      { "ar": "إطلاق فرع جديد من الصفر إلى العمليات الكاملة في 3 أشهر", "en": "Established new branch from zero to full operations within 3 months" },
+      { "ar": "تحقيق 115% من الأهداف السنوية ونمو قاعدة العملاء 35%", "en": "Achieved 115% of annual sales targets and grew customer base by 35%" },
+      { "ar": "زيادة الودائع والمنتجات 25% عبر البيع المتقاطع", "en": "Expanded deposits and product utilization by 25% through cross-selling" }
+    ]
+  },
+  {
+    "date": "2016",
+    "title": { "ar": "ضابط خدمة العملاء", "en": "Customer Service Officer" },
+    "company": "Al Kuraimi Bank for Microfinance — صنعاء",
+    "points": [
+      { "ar": "بناء أسس التميز في خدمة العملاء والعمليات المصرفية", "en": "Built foundations of excellence in customer service and banking operations" },
+      { "ar": "المساهمة في 105% من أهداف الفرع", "en": "Contributed to 105% of branch targets" }
+    ]
+  }
+]
