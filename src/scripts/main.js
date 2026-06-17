@@ -1,5 +1,6 @@
 import { renderExperience } from '../components/experience.js';
 import { renderRoles } from '../components/roles.js';
+import { renderSkills } from '../components/skills.js';
 import { renderArticles } from '../components/articles.js';
 
 let currentLang = 'ar';
@@ -74,6 +75,7 @@ async function loadDynamicSections() {
   const sections = [
     { name: 'experience', target: 'experience-timeline', render: renderExperience },
     { name: 'roles', target: 'expertise-grid', render: renderRoles },
+    { name: 'skills', target: 'skills-grid', render: renderSkills },
     { name: 'articles', target: 'insights-grid', render: renderArticles },
   ];
 
