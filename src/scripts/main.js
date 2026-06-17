@@ -189,6 +189,25 @@ function initInteractions() {
     });
   });
 
+  // Timeline disclosure: delegate so dynamically rendered entries respond to
+  // both pointer and keyboard, keeping aria-expanded in sync for assistive tech.
+  const timeline = document.getElementById('experience-timeline');
+  if (timeline) {
+    const toggleItem = (item) => {
+      const open = item.classList.toggle('active');
+      item.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    timeline.addEventListener('click', (e) => {
+      const item = e.target.closest('.timeline-item');
+      if (item) toggleItem(item);
+    });
+    timeline.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const item = e.target.closest('.timeline-item');
+      if (item) { e.preventDefault(); toggleItem(item); }
+    });
+  }
+
   initHeroParticles();
   initContactForm();
 }

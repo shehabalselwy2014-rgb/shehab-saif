@@ -1,10 +1,11 @@
 import { esc } from './util.js';
 
-// Renders the career timeline. Click-to-expand is preserved via the same
-// inline toggle the original markup used.
+// Renders the career timeline. Each entry is an expandable disclosure; the
+// click/keyboard wiring and aria-expanded state are managed in main.js so the
+// entries are reachable by keyboard, not mouse only.
 export function renderExperience(items, container) {
   container.innerHTML = items.map((item) => `
-    <div class="timeline-item fade-in" onclick="this.classList.toggle('active')">
+    <div class="timeline-item fade-in" role="button" tabindex="0" aria-expanded="false">
       <div class="timeline-dot"></div>
       <span class="timeline-date">${esc(item.date)}</span>
       <div class="timeline-title" data-ar="${esc(item.title.ar)}" data-en="${esc(item.title.en)}">${esc(item.title.ar)}</div>
