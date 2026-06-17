@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +28,7 @@
 <meta name="twitter:description" content="Driving Growth Through Strategic Partnerships, Market Expansion & Digital Transformation">
 <meta name="twitter:image" content="https://shehab-saif.xyz/.netlify/images?url=/public/images/profile.png&amp;w=1200&amp;h=1200&amp;fit=cover&amp;fm=jpg&amp;q=82">
 <meta name="twitter:image:alt" content="شهاب عبدالرحيم عثمان سيف">
-<meta name="theme-color" content="#0B1F3A">
+<meta name="theme-color" content="#0A192F">
 <link rel="canonical" href="https://shehab-saif.xyz/">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -36,20 +36,18 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>شهاب عبدالرحيم عثمان سيف | قيادة النمو التنفيذية</title>
 
-<!-- Restore the visitor's saved (or system-preferred) theme before the page
-     paints, so there is no flash of the wrong color scheme on load. -->
+<!-- Dark "Executive" mode is the default identity. Before the page paints,
+     switch to the optional light variant only if the visitor explicitly chose
+     it, so there is no flash of the wrong color scheme on load. -->
 <script>
   (function () {
     try {
-      var saved = localStorage.getItem('theme');
-      var dark = saved ? saved === 'dark'
-        : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (dark) {
-        document.documentElement.setAttribute('data-theme', 'dark');
+      if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
         var m = document.querySelector('meta[name="theme-color"]');
-        if (m) m.setAttribute('content', '#060B17');
+        if (m) m.setAttribute('content', '#0A2540');
       }
-    } catch (e) { /* storage or matchMedia unavailable */ }
+    } catch (e) { /* storage unavailable */ }
   })();
 </script>
 
@@ -307,7 +305,7 @@
     <div><div class="footer-title" data-ar="الموارد" data-en="Resources">الموارد</div><ul class="footer-links"><li><a href="#downloads" data-ar="السيرة الذاتية" data-en="Resume">السيرة الذاتية</a></li><li><a href="#downloads" data-ar="الملف التعريفي" data-en="Executive Profile">الملف التعريفي</a></li><li><a href="#contact" data-ar="التواصل" data-en="Contact">التواصل</a></li></ul></div>
     <div><div class="footer-title" data-ar="التواصل الاجتماعي" data-en="Social">التواصل الاجتماعي</div><ul class="footer-links"><li><a href="https://linkedin.com/in/shehab-alselwi-a882691b8" target="_blank">LinkedIn</a></li><li><a href="https://wa.me/967781742606" target="_blank">WhatsApp</a></li></ul></div>
   </div>
-  <div class="footer-bottom"><span data-ar="© 2024 شهاب عبدالرحيم عثمان سيف. جميع الحقوق محفوظة." data-en="© 2024 Shehab Abdulraheem Othman Saif. All rights reserved.">© 2024 شهاب عبدالرحيم عثمان سيف. جميع الحقوق محفوظة.</span><span data-ar="صُمم بإتقان تنفيذي" data-en="Crafted with Executive Precision">صُمم بإتقان تنفيذي</span></div>
+  <div class="footer-bottom"><span data-ar="© 2026 شهاب عبدالرحيم عثمان سيف. جميع الحقوق محفوظة." data-en="© 2026 Shehab Abdulraheem Othman Saif. All rights reserved.">© 2026 شهاب عبدالرحيم عثمان سيف. جميع الحقوق محفوظة.</span><span data-ar="صُمم بإتقان تنفيذي" data-en="Crafted with Executive Precision">صُمم بإتقان تنفيذي</span></div>
 </footer>
 <button class="to-top" id="to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 <script type="module" src="src/scripts/main.js"></script>
