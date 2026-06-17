@@ -32,6 +32,10 @@ function switchLanguage() {
     }
   });
 
+  document.querySelectorAll('input[placeholder][data-ar][data-en], textarea[placeholder][data-ar][data-en]').forEach(el => {
+    el.setAttribute('placeholder', currentLang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en'));
+  });
+
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
     metaDesc.setAttribute('content', currentLang === 'ar'
@@ -134,10 +138,12 @@ function initInteractions() {
   // preference) before paint, so start from the live attribute.
   let isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+  themeToggle.setAttribute('aria-pressed', String(isDark));
   themeToggle.addEventListener('click', () => {
     isDark = !isDark;
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
     themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    themeToggle.setAttribute('aria-pressed', String(isDark));
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) metaTheme.setAttribute('content', isDark ? '#0A192F' : '#0A2540');
     try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) { /* storage unavailable */ }
@@ -145,8 +151,40 @@ function initInteractions() {
 
   const mobileToggle = document.getElementById('mobile-toggle');
   const mainNav = document.getElementById('main-nav');
+  const setMobileNav = (open) => {
+    mainNav.classList.toggle('open', open);
+    mobileToggle.setAttribute('aria-expanded', String(open));
+  };
   mobileToggle.addEventListener('click', () => {
-    mainNav.classList.toggle('open');
+    setMobileNav(!mainNav.classList.contains('open'));
+  });
+
+  const cvDropdown = document.querySelector('.cv-dropdown');
+  const cvToggle = document.getElementById('cv-toggle');
+  if (cvDropdown && cvToggle) {
+    cvToggle.addEventListener('click', () => {
+      const open = !cvDropdown.classList.contains('open');
+      cvDropdown.classList.toggle('open', open);
+      cvToggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    if (!mobileToggle.contains(e.target) && !mainNav.contains(e.target)) setMobileNav(false);
+    if (cvDropdown && cvToggle && !cvDropdown.contains(e.target)) {
+      cvDropdown.classList.remove('open');
+      cvToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    setMobileNav(false);
+    if (cvDropdown && cvToggle) {
+      cvDropdown.classList.remove('open');
+      cvToggle.setAttribute('aria-expanded', 'false');
+      if (cvDropdown.contains(document.activeElement)) cvToggle.focus();
+    }
   });
 
   const header = document.getElementById('header');
@@ -186,7 +224,7 @@ function initInteractions() {
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        mainNav.classList.remove('open');
+        setMobileNav(false);
       }
     });
   });
@@ -283,7 +321,9 @@ function initContactForm() {
   const formStatus = document.getElementById('form-status');
   const messages = {
     success: { ar: 'تم إرسال رسالتك بنجاح. سأعاود التواصل معك قريبًا.', en: 'Your message has been sent successfully. I will get back to you soon.' },
-    error: { ar: 'تعذّر إرسال الرسالة. يرجى المحاولة مرة أخرى لاحقًا.', en: 'Could not send your message. Please try again later.' }
+    error: { ar: 'تعذّر إرسال الرسالة. يرجى المحاولة مرة أخرى لاحقًا.', en: 'Could not send your message. Please try again later.' },
+    invalid: { ar: 'يرجى إكمال الحقول المطلوبة بشكل صحيح.', en: 'Please complete the required fields correctly.' },
+    sending: { ar: 'جاري الإرسال...', en: 'Sending...' }
   };
 
   function showFormStatus(type) {
@@ -293,8 +333,16 @@ function initContactForm() {
 
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (!contactForm.checkValidity()) {
+      contactForm.reportValidity();
+      showFormStatus('invalid');
+      return;
+    }
     const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const submitText = submitBtn.querySelector('span');
+    const originalText = submitText ? submitText.textContent : '';
     submitBtn.disabled = true;
+    if (submitText) submitText.textContent = messages.sending[currentLang];
     try {
       const response = await fetch('/', {
         method: 'POST',
@@ -308,6 +356,7 @@ function initContactForm() {
       showFormStatus('error');
     } finally {
       submitBtn.disabled = false;
+      if (submitText) submitText.textContent = originalText;
     }
   });
 }
