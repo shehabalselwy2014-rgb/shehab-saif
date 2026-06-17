@@ -18,6 +18,23 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>شهاب عبدالرحيم عثمان سيف | قيادة النمو التنفيذية</title>
 
+<!-- Restore the visitor's saved (or system-preferred) theme before the page
+     paints, so there is no flash of the wrong color scheme on load. -->
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var dark = saved ? saved === 'dark'
+        : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (dark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute('content', '#060B17');
+      }
+    } catch (e) { /* storage or matchMedia unavailable */ }
+  })();
+</script>
+
 <!-- Self-hosted assets: served from the site's own domain so the page works
      reliably on mobile networks where third-party CDNs are often blocked or
      throttled. -->
@@ -274,6 +291,7 @@
   </div>
   <div class="footer-bottom"><span data-ar="© 2024 شهاب عبدالرحيم عثمان سيف. جميع الحقوق محفوظة." data-en="© 2024 Shehab Abdulraheem Othman Saif. All rights reserved.">© 2024 شهاب عبدالرحيم عثمان سيف. جميع الحقوق محفوظة.</span><span data-ar="صُمم بإتقان تنفيذي" data-en="Crafted with Executive Precision">صُمم بإتقان تنفيذي</span></div>
 </footer>
+<button class="to-top" id="to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 <script type="module" src="src/scripts/main.js"></script>
 </body>
 </html>

@@ -37,6 +37,9 @@ function switchLanguage() {
       ? 'شهاب عبدالرحيم عثمان سيف - قيادي تنفيذي في التسويق وتطوير الأعمال والتحول الرقمي والشراكات الاستراتيجية'
       : 'Shehab Abdulraheem Othman Saif - Executive leader in Marketing, Business Development, Digital Transformation & Strategic Partnerships');
   }
+
+  // Remember the choice so a returning visitor keeps their language.
+  try { localStorage.setItem('lang', currentLang); } catch (e) { /* storage unavailable */ }
 }
 
 // Fetches a JSON file with a timeout and a few retries, so that a slow or
@@ -101,26 +104,41 @@ function renderSectionFallback(el) {
 }
 
 // Attaches scroll-reveal observers. Called after the dynamic sections are in
-// the DOM so their cards are observed too.
+// the DOM so their cards are observed too. Cards revealing together are given
+// a small incremental delay so they cascade in rather than snapping at once.
 function initObservers() {
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
+    const arriving = entries.filter(e => e.isIntersecting);
+    arriving.forEach((entry, i) => {
+      entry.target.style.setProperty('--reveal-delay', `${Math.min(i, 6) * 90}ms`);
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-in:not(.visible)').forEach(el => observer.observe(el));
 }
 
 function initInteractions() {
   document.getElementById('lang-switch').addEventListener('click', switchLanguage);
 
+  // Restore a previously chosen language (default stays Arabic).
+  try {
+    if (localStorage.getItem('lang') === 'en') switchLanguage();
+  } catch (e) { /* storage unavailable */ }
+
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
-  let isDark = false;
+  // The inline head script may have already set a theme (saved or system
+  // preference) before paint, so start from the live attribute.
+  let isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
   themeToggle.addEventListener('click', () => {
     isDark = !isDark;
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
     themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) metaTheme.setAttribute('content', isDark ? '#060B17' : '#0B1F3A');
+    try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) { /* storage unavailable */ }
   });
 
   const mobileToggle = document.getElementById('mobile-toggle');
@@ -130,6 +148,7 @@ function initInteractions() {
   });
 
   const header = document.getElementById('header');
+  const toTop = document.getElementById('to-top');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
@@ -137,7 +156,13 @@ function initInteractions() {
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = (window.scrollY / docHeight) * 100;
     document.getElementById('scroll-progress').style.width = scrollPercent + '%';
+
+    if (toTop) toTop.classList.toggle('show', window.scrollY > 600);
   });
+
+  if (toTop) {
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
 
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav a');
@@ -171,6 +196,9 @@ function initInteractions() {
 function initHeroParticles() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
+  // Honor the user's reduced-motion preference: draw a single static frame
+  // instead of running the continuous animation loop.
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ctx = canvas.getContext('2d');
   let particles = [];
 
@@ -223,7 +251,7 @@ function initHeroParticles() {
         }
       }
     }
-    requestAnimationFrame(animateParticles);
+    if (!reduceMotion) requestAnimationFrame(animateParticles);
   }
   animateParticles();
 }
