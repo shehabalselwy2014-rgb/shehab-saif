@@ -150,17 +150,6 @@ body[dir="ltr"] .phil-num { left:20px; }
 .insight-tag { display:inline-block; padding:4px 10px; background:rgba(37,99,235,0.1); color:var(--accent); font-size:0.75rem; font-weight:700; border-radius:100px; margin-bottom:10px; width:fit-content; }
 .insight-title { font-size:1.05rem; font-weight:700; margin-bottom:10px; flex:1; }
 .insight-meta { font-size:0.8rem; opacity:0.6; display:flex; gap:16px; }
-.testimonials-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px; }
-.testi-card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:32px; transition:var(--transition); position:relative; }
-.testi-card:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
-.testi-quote { font-size:2.5rem; color:var(--secondary); opacity:0.3; position:absolute; top:20px; line-height:1; }
-body[dir="rtl"] .testi-quote { right:24px; }
-body[dir="ltr"] .testi-quote { left:24px; }
-.testi-text { font-size:0.95rem; opacity:0.85; line-height:1.7; margin-bottom:24px; position:relative; z-index:1; }
-.testi-author { display:flex; align-items:center; gap:14px; }
-.testi-avatar { width:48px; height:48px; border-radius:50%; background: linear-gradient(135deg, var(--primary), var(--accent)); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:1rem; flex-shrink:0; }
-.testi-name { font-weight:700; font-size:0.95rem; }
-.testi-role { font-size:0.8rem; opacity:0.6; }
 .downloads-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:20px; }
 .download-card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:28px; text-align:center; transition:var(--transition); text-decoration:none; color:var(--text); display:flex; flex-direction:column; align-items:center; gap:12px; }
 .download-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--accent); }
