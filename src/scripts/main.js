@@ -137,7 +137,7 @@ function initInteractions() {
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
     themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
     const metaTheme = document.querySelector('meta[name="theme-color"]');
-    if (metaTheme) metaTheme.setAttribute('content', isDark ? '#060B17' : '#0B1F3A');
+    if (metaTheme) metaTheme.setAttribute('content', isDark ? '#0A192F' : '#0A2540');
     try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) { /* storage unavailable */ }
   });
 
@@ -226,7 +226,7 @@ function initHeroParticles() {
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(212,175,55,0.5)';
+      ctx.fillStyle = 'rgba(200,169,126,0.55)';
       ctx.fill();
     }
   }
@@ -245,7 +245,7 @@ function initHeroParticles() {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(37,99,235,${0.15 * (1 - dist / 150)})`;
+          ctx.strokeStyle = `rgba(200,169,126,${0.16 * (1 - dist / 150)})`;
           ctx.lineWidth = 1;
           ctx.stroke();
         }
