@@ -21,6 +21,18 @@ body::before { content:''; position:fixed; inset:0; z-index:-2; pointer-events:n
 body::after { content:''; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:var(--grain);
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 body[dir="ltr"] { font-family: var(--font-en); }
+/* Display typeface — a more confident, geometric voice for headings, set
+   against the calmer text faces above. Cairo carries the Arabic headings;
+   Manrope the Latin ones. Swaps with the document direction. */
+body { --font-display: 'Cairo', var(--font-ar); }
+body[dir="ltr"] { --font-display: 'Manrope', var(--font-en); }
+.hero-text h1, .section-title, .profile-name, .profile-content h3, .timeline-title,
+.case-title, .phil-title, .expertise-title, .insight-title, .cred-value, .footer-title {
+  font-family: var(--font-display);
+}
+/* Latin headings benefit from tight tracking; Arabic does not — keep it at 0
+   so connected letterforms stay legible. */
+body[dir="rtl"] .hero-text h1, body[dir="rtl"] .section-title { letter-spacing: 0; }
 ::selection { background: rgba(200,169,126,0.28); color: var(--primary); }
 [data-theme="dark"] ::selection { color:#fff; }
 :focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:4px; }
@@ -221,6 +233,42 @@ body[dir="ltr"] .to-top { right:28px; }
 .to-top:hover { color:var(--secondary); border-color:var(--secondary); transform:translateY(-3px) scale(1.05); }
 .section-fallback { grid-column:1/-1; text-align:center; padding:40px 20px; color:var(--text-secondary,#64748B); display:flex; flex-direction:column; align-items:center; gap:16px; }
 .section-fallback p { font-size:0.95rem; }
+
+/* ── Polish layer ─────────────────────────────────────────────────────────
+   Refinements layered on top of the base system: a choreographed hero
+   entrance, tactile card feedback, and a clearer expand affordance on the
+   timeline. All motion here is disabled under prefers-reduced-motion below. */
+
+/* Hero load: each line of the intro rises in sequence, the portrait last,
+   so the eye is led down the column before settling on the image. */
+@keyframes rise-in { from { opacity:0; transform:translateY(26px); } to { opacity:1; transform:translateY(0); } }
+.hero-text > * { animation: rise-in 0.85s cubic-bezier(0.16,1,0.3,1) backwards; }
+.hero-text .positioning { animation-delay:0.05s; }
+.hero-text h1 { animation-delay:0.15s; }
+.hero-text .hero-role { animation-delay:0.25s; }
+.hero-text .subtitle { animation-delay:0.35s; }
+.hero-text .hero-buttons { animation-delay:0.45s; }
+.hero-text .hero-credentials { animation-delay:0.55s; }
+.hero-image { animation: rise-in 1s cubic-bezier(0.16,1,0.3,1) 0.3s backwards; }
+/* The portrait breathes very slightly once settled. */
+@keyframes portrait-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+.hero-image img { animation: portrait-float 7s ease-in-out 1.3s infinite; }
+.cred-value { background:linear-gradient(120deg,#fff,var(--secondary)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+
+/* Tactile lift on the strengths chips, matching the cards elsewhere. */
+.strength-item { transition:var(--transition); }
+.strength-item:hover { transform:translateY(-3px); border-color:var(--secondary); background:rgba(200,169,126,0.09); }
+
+/* Timeline expand affordance: a chevron that rotates when the entry opens. */
+.timeline-title { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.timeline-title::after { content:'\f078'; font-family:'Font Awesome 6 Free'; font-weight:900; font-size:0.78rem; color:var(--accent); opacity:0.65; transition:transform 0.4s ease, opacity 0.3s; flex-shrink:0; }
+.timeline-item:hover .timeline-title::after { opacity:1; }
+.timeline-item.active .timeline-title::after { transform:rotate(180deg); }
+.timeline-item:focus-visible { outline:2px solid var(--accent); outline-offset:6px; border-radius:var(--radius-sm); }
+
+/* Card images and avatars: a subtle inner ring + smoother hover for depth. */
+.profile-avatar { transition:var(--transition); }
+.profile-card:hover .profile-avatar { transform:scale(1.04); box-shadow:0 12px 32px rgba(200,169,126,0.4); }
 @media (max-width:1024px) { .hero { min-height:auto; padding:120px 0 72px; } .hero-content { grid-template-columns:1fr; text-align:center; gap:44px; } .hero-text { max-width:640px; margin:0 auto; } .hero-text .subtitle { margin-left:auto; margin-right:auto; } .hero-text .positioning { justify-content:center; } .hero-buttons { justify-content:center; } .hero-credentials { justify-content:center; gap:44px; } .hero-image { order:-1; } .hero-image img, .hero-image::before { max-width:320px; } .profile-grid { grid-template-columns:1fr; } .profile-card { position:static; } .contact-grid { grid-template-columns:1fr; } .footer-grid { grid-template-columns:1fr 1fr; } }
 @media (max-width:768px) { .logo-img { height:40px; } .nav { display:none; position:absolute; top:72px; left:0; right:0; background:var(--card-bg); backdrop-filter:blur(20px); flex-direction:column; padding:20px; gap:16px; border-bottom:1px solid var(--border); box-shadow:var(--shadow-lg); } .nav.open { display:flex; } .mobile-toggle { display:flex; align-items:center; justify-content:center; } .hero { padding:104px 0 56px; } .hero-content { gap:36px; } .hero-image img, .hero-image::before { max-width:260px; } .hero-credentials { gap:24px 32px; margin-top:32px; padding-top:24px; } .cred-value { font-size:1.35rem; } .section { padding:60px 20px; } .section-title { font-size:1.8rem; } .footer-grid { grid-template-columns:1fr; } .footer-bottom { flex-direction:column; gap:12px; text-align:center; } }
 @media (max-width:480px) { .hero-buttons .btn { width:100%; justify-content:center; } .hero-credentials { gap:20px; } .cred-item { flex:1; min-width:90px; } }
