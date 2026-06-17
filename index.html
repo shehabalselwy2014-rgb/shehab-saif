@@ -20,10 +20,9 @@
 
 <!-- Self-hosted assets: served from the site's own domain so the page works
      reliably on mobile networks where third-party CDNs are often blocked or
-     throttled. Chart.js is deferred and optional — the page renders without it. -->
+     throttled. -->
 <link rel="stylesheet" href="public/vendor/fonts/fonts.css">
 <link rel="stylesheet" href="public/vendor/fontawesome/css/all.min.css">
-<script src="public/vendor/chart.umd.min.js" defer></script>
 
 <link rel="stylesheet" href="src/styles/main.css">
 </head>
@@ -37,7 +36,6 @@
       <ul class="nav" id="main-nav">
         <li><a href="#hero" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
         <li><a href="#profile" data-ar="نبذة تنفيذية" data-en="Executive Profile">نبذة تنفيذية</a></li>
-        <li><a href="#impact" data-ar="الإنجازات" data-en="Achievements">الإنجازات</a></li>
         <li><a href="#experience" data-ar="الخبرات" data-en="Experience">الخبرات</a></li>
         <li><a href="#cases" data-ar="دراسات الحالة" data-en="Case Studies">دراسات الحالة</a></li>
         <li><a href="#insights" data-ar="المقالات" data-en="Insights">المقالات</a></li>
@@ -69,7 +67,7 @@
       <h1 data-ar="شهاب عبدالرحيم عثمان سيف" data-en="Shehab Abdulraheem Othman Saif">شهاب عبدالرحيم عثمان سيف</h1>
       <p class="subtitle" data-ar="قيادة النمو من خلال الشراكات الاستراتيجية والتوسع السوقي والتحول الرقمي" data-en="Driving Growth Through Strategic Partnerships, Market Expansion & Digital Transformation">قيادة النمو من خلال الشراكات الاستراتيجية والتوسع السوقي والتحول الرقمي</p>
       <div class="hero-buttons">
-        <a href="#impact" class="btn btn-primary"><span data-ar="استعرض الإنجازات" data-en="View Achievements">استعرض الإنجازات</span><i class="fas fa-arrow-down"></i></a>
+        <a href="#cases" class="btn btn-primary"><span data-ar="استعرض الإنجازات" data-en="View Achievements">استعرض الإنجازات</span><i class="fas fa-arrow-down"></i></a>
         <a href="#" class="btn btn-outline"><span data-ar="تحميل السيرة الذاتية" data-en="Download CV">تحميل السيرة الذاتية</span><i class="fas fa-download"></i></a>
       </div>
     </div>
@@ -77,17 +75,6 @@
       <div class="hero-glow"></div>
       <img src="public/images/profile.png" alt="Shehab Abdulraheem Othman Saif Portrait">
     </div>
-  </div>
-</section>
-
-<section class="section" id="impact">
-  <div class="container">
-    <div class="section-header fade-in">
-      <div class="section-label" data-ar="الأرقام تتحدث" data-en="Numbers That Speak">الأرقام تتحدث</div>
-      <h2 class="section-title" data-ar="إنجازات قياسية" data-en="Measurable Impact">إنجازات قياسية</h2>
-      <p class="section-desc" data-ar="نتائج ملموسة في قيادة النمو وتطوير الأعمال والتحول الرقمي" data-en="Tangible results in growth leadership, business development, and digital transformation">نتائج ملموسة في قيادة النمو وتطوير الأعمال والتحول الرقمي</p>
-    </div>
-    <div class="impact-grid" id="impact-grid"></div>
   </div>
 </section>
 
@@ -214,22 +201,7 @@
   </div>
 </section>
 
-<section class="section" id="analytics">
-  <div class="container">
-    <div class="section-header fade-in">
-      <div class="section-label" data-ar="لوحة التحليلات" data-en="Analytics Dashboard">لوحة التحليلات</div>
-      <h2 class="section-title" data-ar="الأرقام التي تهم" data-en="Numbers That Matter">الأرقام التي تهم</h2>
-    </div>
-    <div class="analytics-grid">
-      <div class="chart-card fade-in"><div class="chart-title"><i class="fas fa-chart-bar"></i> <span data-ar="أداء المبيعات" data-en="Sales Performance">أداء المبيعات</span></div><canvas id="salesChart"></canvas></div>
-      <div class="chart-card fade-in"><div class="chart-title"><i class="fas fa-chart-pie"></i> <span data-ar="نمو التبني الرقمي" data-en="Digital Adoption Growth">نمو التبني الرقمي</span></div><canvas id="digitalChart"></canvas></div>
-      <div class="chart-card fade-in"><div class="chart-title"><i class="fas fa-chart-line"></i> <span data-ar="نمو قاعدة العملاء" data-en="Customer Base Growth">نمو قاعدة العملاء</span></div><canvas id="growthChart"></canvas></div>
-      <div class="chart-card fade-in"><div class="chart-title"><i class="fas fa-project-diagram"></i> <span data-ar="الشراكات الاستراتيجية" data-en="Strategic Partnerships">الشراكات الاستراتيجية</span></div><canvas id="partnersChart"></canvas></div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="insights" style="background:var(--glass);">
+<section class="section" id="insights">
   <div class="container">
     <div class="section-header fade-in">
       <div class="section-label" data-ar="الرؤى والتأملات" data-en="Thought Leadership">الرؤى والتأملات</div>
